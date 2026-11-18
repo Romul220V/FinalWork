@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Скачивание кода из репозитория
+      - name: Скачка кода из репозитория
         uses: actions/checkout@v4
 
       - name: Устанавливка Java 21
@@ -25,13 +25,23 @@ jobs:
       - name: Запуск автотестов в фоновом режиме
         run: ./gradlew clean test -Dselenide.browser=chrome -Dselenide.headless=true
 
-      - name: Подгрузка истории прошлых запусков для трендов Allure
-        uses: simple-elf/allure-report-action@v1.7
+      - name: Подтягивание истории прошлых запусков из ветки gh-pages
+        uses: actions/checkout@v4
         if: always()
+        continue-on-error: true
         with:
-          allure_results: build/allure-results
-          allure_history: allure-history
-          keep_reports: 20
+          ref: gh-pages
+          path: gh-pages-history
+
+      - name: Перенос истории в результаты тестов
+        if: always()
+        run: |
+          mkdir -p build/allure-results/history
+          cp -r gh-pages-history/history/* build/allure-results/history/ 2>/dev/null || true
+
+      - name: Генерирация готового HTML-отчёт Allure через Gradle
+        if: always()
+        run: ./gradlew allureReport
 
       - name: Публикация отчёта на GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -39,4 +49,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: build/reports/allure-report
