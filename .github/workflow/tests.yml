@@ -1,0 +1,42 @@
+name: UI Tests & Allure Report
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Скачивание кода из репозитория
+        uses: actions/checkout@v4
+
+      - name: Устанавливка Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Выдача прав на запуск gradlew
+        run: chmod +x gradlew
+
+      - name: Запуск автотестов в фоновом режиме
+        run: ./gradlew clean test -Dselenide.browser=chrome -Dselenide.headless=true
+
+      - name: Подгрузка истории прошлых запусков для трендов Allure
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          allure_results: build/allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Публикация отчёта на GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history

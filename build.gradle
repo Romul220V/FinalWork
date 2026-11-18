@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '3.0.1'
 }
 
 group = 'Zadoya.Roman'
@@ -13,8 +14,15 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:6.0.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testImplementation 'com.codeborne:selenide:7.19.1'
+
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+    testImplementation 'io.qameta.allure:allure-selenide:2.29.1'
 }
 
 test {
     useJUnitPlatform()
+
+    systemProperties(System.getProperties())
 }
