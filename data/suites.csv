@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","849","testInvalidLoginParametrized(String, String, String) Проверка ошибки входа: логин=""standard_user"", пароль=""""","","Thu Nov 19 00:19:50 UTC 2026","passed","Thu Nov 19 00:19:51 UTC 2026","","tests.LoginTests","tests.LoginTests","testInvalidLoginParametrized"
+"","19399","testInvalidLoginParametrized(String, String, String) Проверка ошибки входа: логин="""", пароль=""secret_sauce""","","Thu Nov 19 00:19:30 UTC 2026","passed","Thu Nov 19 00:19:50 UTC 2026","","tests.LoginTests","tests.LoginTests","testInvalidLoginParametrized"
+"","1523","Полный цикл покупки рюкзака Sauce Labs Backpack","","Thu Nov 19 00:19:54 UTC 2026","passed","Thu Nov 19 00:19:55 UTC 2026","","tests.OrderTests","tests.OrderTests","testFullOrderFlow"
+"","1411","Успешная авторизация стандартного пользователя","","Thu Nov 19 00:19:52 UTC 2026","passed","Thu Nov 19 00:19:53 UTC 2026","","tests.LoginTests","tests.LoginTests","testSuccessfulLogin"
+"","880","Авторизация заблокированного пользователя","","Thu Nov 19 00:19:53 UTC 2026","passed","Thu Nov 19 00:19:54 UTC 2026","","tests.LoginTests","tests.LoginTests","testLockedOutUserLogin"
+"","886","testInvalidLoginParametrized(String, String, String) Проверка ошибки входа: логин=""standard_user"", пароль=""wrong_pass""","","Thu Nov 19 00:19:51 UTC 2026","passed","Thu Nov 19 00:19:52 UTC 2026","","tests.LoginTests","tests.LoginTests","testInvalidLoginParametrized"
